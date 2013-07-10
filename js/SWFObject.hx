@@ -3,23 +3,18 @@
 
 package js;
 
-import js.Dom;
-
+@:native("window.swfobject")
 extern class SWFObject {
 	static var ua:DetectedUserAgent;
 	
-	static function embedSWF(swf:String, repl:String, w:String, h:String, ver:String
-	, ?express:String, ?flashvars:{}, ?params:Params, ?attrs:OptAttribs
-	, ?callb:CallbackEvent->Void):Void;
+	static function embedSWF(swf:String, repl:String, w:String, h:String, ver:String,
+		?express:String, ?flashvars:{}, ?params:Params, ?attrs:OptAttribs,
+		?callb:CallbackEvent->Void):Void;
 	static function getFlashPlayerVersion():Version;
 	static function hasFlashPlayerVersion(ver:String):Bool; //"major.minor.release"
-	static function createSWF(attrs:Attribs, params:Params, repl:String):HtmlDom;
+	static function createSWF(attrs:Attribs, params:Params, repl:String):js.html.ObjectElement;
 	static function removeSWF(id:String):Void;
 	static function switchOffAutoHideShow():Void;
-	
-	private static function __init__():Void untyped {
-		js.SWFObject = window.swfobject;
-	}
 }
 
 private typedef DetectedUserAgent = {
@@ -34,7 +29,7 @@ private typedef DetectedUserAgent = {
 private typedef CallbackEvent = {
 	success:Bool,
 	id:String,
-	ref:HtmlDom
+	ref:js.html.Element
 }
 
 private typedef OptAttribs = {
